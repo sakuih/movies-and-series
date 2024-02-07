@@ -2,7 +2,7 @@ package main
 
 import (
   "net/http"
-  //"os"
+  "os"
   //"fmt"
   "log"
 
@@ -17,7 +17,7 @@ func main () {
     log.Fatal("Envirioment file not found %s", err)
   }
 
-  //val := os.Getenv("SECRET")
+  valsecret := os.Getenv("SECRET")
 
   router := gin.Default()
 
@@ -37,6 +37,12 @@ func main () {
 
 
   api.GET("/", getMoviesHandler)
+  api.GET("/data", func (c *gin.Context) {
+    data := map[string]string{
+                "Secret": valsecret,
+            }
+    c.JSON(200, data)
+  })
   api.POST("/jokes/like/:movieID", LikeMovie)
   api.DELETE("/Delete", deleteLikeHandler)
 
@@ -60,6 +66,8 @@ func getMoviesHandler (c *gin.Context) {
     "message":"Jokes handler not implemented yet",
   })
 }
+
+//func getApiSecret (c *gin.Context, valsecret) {}
 
 func LikeMovie(c *gin.Context) {
   c.Header("Content-Type", "application/json")
