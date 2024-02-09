@@ -26,25 +26,20 @@ func main () {
   
   api := router.Group("/api")
   {
-    api.GET("/healthCheck", func(c *gin.Context) {
-      c.JSON(http.StatusOK, gin.H {
-        "message": "pong",
-      })
+    api.GET("/data", func (c *gin.Context) {
+      data := map[string]string{
+                  "Secret": valsecret,
+              }
+      c.JSON(200, data)
     })
 
+    api.GET("/", getMoviesHandler)
+    api.POST("/like/:movieID", LikeMovie)
+    api.DELETE("/Delete", deleteLikeHandler)
 
   }
 
 
-  api.GET("/", getMoviesHandler)
-  api.GET("/data", func (c *gin.Context) {
-    data := map[string]string{
-                "Secret": valsecret,
-            }
-    c.JSON(200, data)
-  })
-  api.POST("/jokes/like/:movieID", LikeMovie)
-  api.DELETE("/Delete", deleteLikeHandler)
 
   router.Run(":3002")
 }

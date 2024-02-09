@@ -16,7 +16,6 @@ const App = () => {
 	const [favourites, setFavourites] = useState([])
 	const [searchValue, setSearchValue] = useState('')
   const [API_KEY, setAPI_KEY] = useState('')
-  console.log(API_KEY)
 
 	const getMovieRequest = async (searchValue) => {
 

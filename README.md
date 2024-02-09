@@ -14,6 +14,7 @@ Techologies used
 ```
 go get github.com/gin-gonic/contrib/static
 go get github.com/gin-gonic/gin
+go get gorm.io/gorm gorm.io/driver/postgres
 cd views
 npm install
 cd ..
