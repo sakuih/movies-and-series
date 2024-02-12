@@ -6,6 +6,9 @@ import (
   //"fmt"
   "log"
 
+  "github.com/sakuih/movies-and-series.com/models"
+  "github.com/sakuih/movies-and-series.com/routes"
+  "github.com/sakuih/movies-and-series.com/controllers"
   "github.com/gin-gonic/contrib/static"
   "github.com/gin-gonic/gin"
   "github.com/joho/godotenv"
@@ -16,14 +19,16 @@ func main () {
   if err != nil {
     log.Fatal("Envirioment file not found %s", err)
   }
+  models.OpenDatabaseConnection()
+  models.AutoMigrateModels()
+  router := routes.SetupRoutes()
 
   valsecret := os.Getenv("SECRET")
 
-  router := gin.Default()
+  //router := gin.Default()
 
   router.Use(static.Serve("/", static.LocalFile("./views/dist/", true)))
 
-  
   api := router.Group("/api")
   {
     api.GET("/data", func (c *gin.Context) {
@@ -51,8 +56,8 @@ func deleteLikeHandler (c *gin.Context) {
 
   c.JSON(http.StatusOK, gin.H{
     "message": "delete",
-  }) 
-} 
+  })
+}
 
 func getMoviesHandler (c *gin.Context) {
   c.Header("Content-Type", "application/json")

@@ -4,7 +4,7 @@ import (
 
   "net/http"
   "github.com/gin-gonic/gin"
-  "github.com/username/go-gin-postgresql-backend/src/models"
+  "github.com/sakuih/movies-and-series/models"
 )
 
 func getFavorites(c *gin.Context) {

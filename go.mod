@@ -1,4 +1,4 @@
-module movies-and-series.com
+module github.com/sakuih/movies-and-series.com
 
 go 1.21.1
 

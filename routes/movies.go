@@ -3,7 +3,7 @@ package routes
 
 import (
   "github.com/gin-gonic/gin"
-  "github.com/username/go-gin-postgresql-backend/src/routes"
+  //"movies-and-series/routes"
 )
 
 func favoritesGroupRouter (router *gin.RouterGroup) {
