@@ -1,22 +1,22 @@
-package controllers
+  package controllers
 
 import (
 
   "net/http"
   "github.com/gin-gonic/gin"
-  "github.com/sakuih/movies-and-series/models"
+  "movies-and-series.com/src/models"
 )
 
-func getFavorites(c *gin.Context) {
+func GetFavorites(c *gin.Context) {
   favorites, err := models.FetchAllFavorites()
   if err != nil {
     c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
     return
   }
-  c.JSON(http.StatusOK, gin.H{"message": "Fetch Succesful"})
+  c.JSON(http.StatusOK, gin.H{"message": "Fetch Succesful", "data": favorites})
 }
 
-func addFavorite(c *gin.Context) {
+func AddFavorite(c *gin.Context) {
   var input models.Favorite
 
   if err := c.ShouldBindJSON(&input); err != nil {
@@ -36,6 +36,6 @@ func addFavorite(c *gin.Context) {
    c.JSON(http.StatusCreated, gin.H{"status": "success", "message": "favorite saved successfully", "data": savedFavorite})
 
 }
-func removeFavorite(c *gin.Context){
+func RemoveFavorite(c *gin.Context){
 }
 

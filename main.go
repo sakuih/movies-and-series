@@ -6,9 +6,11 @@ import (
   //"fmt"
   "log"
 
-  "github.com/sakuih/movies-and-series.com/models"
-  "github.com/sakuih/movies-and-series.com/routes"
-  "github.com/sakuih/movies-and-series.com/controllers"
+  "movies-and-series.com/src/models"
+  "movies-and-series.com/src/routes"
+  //"movies-and-series.com/src/controllers"
+  "movies-and-series.com/src/middlewares"
+
   "github.com/gin-gonic/contrib/static"
   "github.com/gin-gonic/gin"
   "github.com/joho/godotenv"
@@ -22,6 +24,7 @@ func main () {
   models.OpenDatabaseConnection()
   models.AutoMigrateModels()
   router := routes.SetupRoutes()
+  middlewares.RegisterMiddlewares(router)
 
   valsecret := os.Getenv("SECRET")
 

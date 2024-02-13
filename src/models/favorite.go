@@ -26,7 +26,7 @@ func (favorite *Favorite) Save() (*Favorite, error) {
   return favorite, nil
 }
 
-func FetchAllFavorite() (*[]Favorite, error) {
+func FetchAllFavorites() (*[]Favorite, error) {
   var favorites []Favorite
   err := Database.Find(&favorites).Error
   if err != nil {
@@ -35,7 +35,7 @@ func FetchAllFavorite() (*[]Favorite, error) {
   return &favorites, nil
 }
 
-func DeleteStartup(id string= error {
+func DeleteStartup(id string) error {
  err := Database.Model(&Favorite{}).Where("id = ?", id).Delete(&Favorite{}).Error
   if err != nil {
     return err
