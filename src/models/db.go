@@ -24,7 +24,7 @@ func OpenDatabaseConnection () {
  if err != nil {
   panic(err)
  } else {
-  fmt.Println("lets go")
+  fmt.Println("Connected to database")
  }
 
 }

@@ -5,6 +5,7 @@ import (
   "github.com/gin-gonic/gin"
   //"movies-and-series.com/src/routes"
   "movies-and-series.com/src/controllers"
+  middleware "movies-and-series.com/src/middlewares"
   "os"
 )
 
@@ -28,7 +29,8 @@ func favoritesGroupRouter (router *gin.RouterGroup) {
 }
 
 func SetupRoutes () *gin.Engine {
-  r := gin.Default()
+  r := gin.New()
+  r.Use(middleware.Logger())
   versionRouter := r.Group("api/v1")
   favoritesGroupRouter(versionRouter)
 
