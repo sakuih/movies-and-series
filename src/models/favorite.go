@@ -2,6 +2,7 @@ package models
 
 import (
   "gorm.io/gorm"
+  "time"
 )
 
 type Favorite struct {
@@ -9,13 +10,8 @@ type Favorite struct {
   movieID       int
   movieTitle    string
   User          User
-}
-
-type User struct {
-  gorm.Model
-  userID        int
-  username      string
-  password      string
+  createdAt     time.Time
+  UpdatedAt     time.Time
 }
 
 func (favorite *Favorite) Save() (*Favorite, error) {

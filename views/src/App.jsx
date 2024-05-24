@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-//import 'dotenv/config';
-//require('dotenv').config()
 import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
@@ -17,11 +16,15 @@ const App = () => {
 	const [searchValue, setSearchValue] = useState('')
   const [API_KEY, setAPI_KEY] = useState('')
 
+	
 	const getMovieRequest = async (searchValue) => {
 
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`
+		//const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`
 
-		const response = await fetch(url)
+		const url = `http://localhost:3002/api/data`
+		const response = axios.get(url, {
+			params: { searchValue }
+		})
 		const responseJson = await response.json()
 
 		if (responseJson.Search) {
@@ -29,23 +32,16 @@ const App = () => {
 		}
 	};
 
-  const getAPIKEY = async () => {
-    const url = `http://localhost:3002/api/data/`
-    const response = await fetch(url)
-		const responseJson = await response.json()
-    setAPI_KEY(responseJson.Secret)
 
-
-  }
-
+	
 	useEffect(() => {
 		getMovieRequest(searchValue)
 	}, [searchValue])
 
+/*
 	useEffect(() => {
 		getAPIKEY()
 	}, [])
-/*
 	useEffect(() => {
 		const movieFavourites = JSON.parse(
 			localStorage.getItem('react-movie-app-favourites')
@@ -62,7 +58,7 @@ const App = () => {
 		const newFavouriteList = [...favourites, movie]
 		setFavourites(newFavouriteList)
 		//saveToLocalStorage(newFavouriteList)
-	};
+	}
 
 	const removeFavouriteMovie = (movie) => {
 		const newFavouriteList = favourites.filter(
@@ -98,7 +94,8 @@ const App = () => {
 				/>
 			</div>
 		</div>
-	);
-};
+	)
+	
+}
 
 export default App;

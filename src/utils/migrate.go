@@ -1,16 +1,18 @@
-package main
+package utils
 
 import (
-  "fmt"
-  "log"
-  "os"
+  //"fmt"
+  //"log"
+  //"os"
 
-  "gorm.io/gorm"
+  //"gorm.io/gorm"
+  //"gorm.io/driver/postgres"
 
+  //User "movies-and-series.com/src/models"
 )
 
 func init() {
-
+/*
   user := os.Getenv("DB_USER")
   pass := os.Getenv("DB_PASS")
   dbname := os.Getenv("DB_NAME")
@@ -21,9 +23,9 @@ func init() {
     panic("failed to connect database")
   }
 
-  db.AutoMigrate(&User{})
+  db.AutoMigrate()
   
-
+  */
 }
 
 

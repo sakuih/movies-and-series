@@ -1,39 +1,27 @@
 package routes
 
-
 import (
-  "github.com/gin-gonic/gin"
-  //"movies-and-series.com/src/routes"
-  "movies-and-series.com/src/controllers"
-  middleware "movies-and-series.com/src/middlewares"
-  "os"
+	"github.com/gin-gonic/gin"
+	"movies-and-series.com/src/controllers"
+	middleware "movies-and-series.com/src/middlewares"
 )
 
-func favoritesGroupRouter (router *gin.RouterGroup) {
-  favor := router.Group("/favor")
-  api := router.Group("/api")
-  {
-    api.GET("/data", func (c *gin.Context) {
-      valsecret := os.Getenv("SECRET")
-      data := map[string]string{
-                  "Secret": valsecret,
-              }
-      c.JSON(200, data)
-    })
-  }
-
-  favor.GET("/get", controllers.GetFavorites)
-  favor.POST("/add", controllers.AddFavorite)
-  favor.DELETE("/remove", controllers.RemoveFavorite)
+func favoritesGroupRouter(router *gin.RouterGroup) {
+	api := router.Group("/data/api")
+	{
+		api.GET("/data", controllers.GetData)
+		api.GET("/get", controllers.GetFavorites)
+		api.POST("/add", controllers.AddFavorite)
+		api.DELETE("/remove", controllers.RemoveFavorite)
+	}
 
 }
 
-func SetupRoutes () *gin.Engine {
-  r := gin.New()
-  r.Use(middleware.Logger())
-  versionRouter := r.Group("api/v1")
-  favoritesGroupRouter(versionRouter)
+func SetupRoutes() *gin.Engine {
+	r := gin.New()
+	r.Use(middleware.Logger(), gin.Recovery(), middleware.CorsMiddleware())
+	versionRouter := r.Group("api/v1")
+	favoritesGroupRouter(versionRouter)
 
-  return r
+	return r
 }
-
