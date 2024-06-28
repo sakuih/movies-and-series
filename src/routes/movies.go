@@ -9,7 +9,7 @@ import (
 func favoritesGroupRouter(router *gin.RouterGroup) {
 	api := router.Group("/data/api")
 	{
-		api.GET("/data", controllers.GetData)
+		api.POST("/data", controllers.GetData)
 		api.GET("/get", controllers.GetFavorites)
 		api.POST("/add", controllers.AddFavorite)
 		api.DELETE("/remove", controllers.RemoveFavorite)

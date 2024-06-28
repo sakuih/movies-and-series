@@ -21,11 +21,13 @@ const App = () => {
 
 		//const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`
 
-		const url = `http://localhost:3002/api/data`
-		const response = axios.get(url, {
-			params: { searchValue }
+		const url = `http://localhost:3002/api/data?searchValue=${searchValue}`
+		const response = axios.post(url)
+		.then(() => {
+			console.log("resolved 1")
 		})
 		const responseJson = await response.json()
+
 
 		if (responseJson.Search) {
 			setMovies(responseJson.Search)
